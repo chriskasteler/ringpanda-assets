@@ -64,7 +64,8 @@ footer{padding:40px 0;color:var(--muted);font-size:14px}footer .wrap{display:fle
 <div class="calls">
 <button class="call" data-assistant="f2f3f8da-efe9-44c3-b7e5-2f9b90cf47d4" data-name="Maddie"><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4.2a4.5 4.5 0 0 0 5.3 5.3l-9.3 9.3a2.4 2.4 0 0 1-3.4-3.4l9.3-9.3a4.5 4.5 0 0 0-1.9-1.9z"/></svg><span><small>Plumbing company demo</small><b class="lbl">Talk to Maddie</b></span></button>
 <button class="call" data-assistant="abfaa2c7-cef5-43d5-a35d-d0b9580fc9c3" data-name="Tony"><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7c5-3 11-3 16 0L12 21z"/><path d="M5.5 9.5c4-2 9-2 13 0"/><circle cx="10.5" cy="12.5" r="1"/><circle cx="13.5" cy="15.5" r="1"/></svg><span><small>Pizza shop demo</small><b class="lbl">Talk to Tony</b></span></button>
-<span class="small">Talk right here in your browser. Just allow your microphone. Try asking Tony "where's my order?" or tell Maddie your sink is leaking.</span></div></div>
+<span class="small">Talk right here in your browser. Just allow your microphone. Try asking Tony "where's my order?" or tell Maddie your sink is leaking.</span>
+<span class="small" id="demo-status" role="status" style="color:var(--bamboo-700);font-weight:600"></span></div></div>
 <div class="personas">
 <div class="pc"><div class="av" style="background:#E3F0E8;color:#1E5B43">M</div><div><b>Maddie</b><span>Ridgeline Plumbing</span><div class="tags"><i>Woman's voice</i><i>Warm and calm</i></div></div></div>
 <div class="pc"><div class="av" style="background:#FDEBD8;color:#1B1A17">T</div><div><b>Tony</b><span>Valley Slice Pizza</span><div class="tags"><i>Man's voice</i><i>Laid-back</i></div></div></div>
@@ -133,21 +134,33 @@ footer{padding:40px 0;color:var(--muted);font-size:14px}footer .wrap{display:fle
 
 <footer><div class="wrap"><img src="/assets/img/lockup-horizontal.svg" alt="Ring Panda"><span>© 2026 Ring Panda, a Kastle Capital LLC company.</span></div></footer>
 <script type="module">
-import VapiMod from "https://esm.sh/@vapi-ai/web";
-const Vapi = VapiMod.default || VapiMod;
-const vapi = new Vapi("84126ba0-5d8c-4fc2-9208-c086b3469ae4");
-let active=null;
+const KEY="84126ba0-5d8c-4fc2-9208-c086b3469ae4";
+let vapi=null,active=null;
 const btns=[...document.querySelectorAll("button.call")];
+const status=document.getElementById("demo-status");
+const say=t=>{if(status)status.textContent=t};
 const reset=()=>{btns.forEach(b=>{b.classList.remove("live");b.disabled=false;b.querySelector(".lbl").textContent="Talk to "+b.dataset.name});active=null};
+async function getVapi(){
+  if(vapi)return vapi;
+  let mod=null,err=null;
+  for(const u of ["https://cdn.jsdelivr.net/npm/@vapi-ai/web@3.1.0/+esm","https://esm.sh/@vapi-ai/web@3.1.0"]){
+    try{mod=await import(u);break}catch(e){err=e;console.error("load failed",u,e)}
+  }
+  if(!mod)throw err||new Error("load failed");
+  let V=mod.default||mod.Vapi||mod; if(V&&V.default)V=V.default;
+  vapi=new V(KEY);
+  vapi.on("call-start",()=>{if(active){active.classList.add("live");active.querySelector(".lbl").textContent="Talking... tap to hang up";say("You're connected. Talk like you're a customer calling in.")}});
+  vapi.on("call-end",()=>{reset();say("Call ended. Want one like that for your business? Book a setup call below.")});
+  vapi.on("error",e=>{console.error(e);reset();say("Something went wrong connecting. Check your microphone and try again.")});
+  return vapi;
+}
 btns.forEach(b=>b.addEventListener("click",async()=>{
-  if(active===b){vapi.stop();reset();return}
+  if(active===b){vapi&&vapi.stop();reset();return}
   if(active)return;
   active=b;btns.forEach(x=>{if(x!==b)x.disabled=true});
-  b.querySelector(".lbl").textContent="Connecting...";
-  try{await vapi.start(b.dataset.assistant,{maxDurationSeconds:180})}catch(e){console.error(e);reset();alert("Couldn't start the demo. Check that your microphone is allowed and try again.")}
+  b.querySelector(".lbl").textContent="Connecting...";say("Allow your microphone if your browser asks.");
+  try{const v=await getVapi();await v.start(b.dataset.assistant,{maxDurationSeconds:180})}
+  catch(e){console.error(e);reset();say("Couldn't start the demo: "+(e&&e.message?e.message:"check your microphone and try again."))}
 }));
-vapi.on("call-start",()=>{if(active){active.classList.add("live");active.querySelector(".lbl").textContent="Talking... tap to hang up"}});
-vapi.on("call-end",reset);
-vapi.on("error",e=>{console.error(e);reset()});
 </script>
 </body></html>
