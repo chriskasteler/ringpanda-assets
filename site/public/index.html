@@ -52,6 +52,7 @@ details{background:var(--raised);border:1px solid var(--line);border-radius:var(
 .cta{background:var(--bamboo-700);color:#fff;border-radius:var(--r-lg);padding:48px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
 .cta img{width:180px;background:var(--surface);border-radius:var(--r-lg);padding:12px}
 .cta .btn{background:var(--tan-500);color:var(--ink);margin-top:24px}.cta .btn:hover{background:var(--tan-600)}
+.cform{margin-top:24px;display:grid;gap:14px;max-width:560px}.cform .frow{display:grid;grid-template-columns:1fr 1fr;gap:14px}.cform label{display:grid;gap:6px;font:600 14px/20px Figtree;color:var(--bamboo-100)}.cform input,.cform textarea{font:400 16px/24px Figtree;padding:10px 14px;border-radius:var(--r-md);border:2px solid transparent;background:var(--surface);color:var(--ink)}.cform input:focus,.cform textarea:focus{outline:none;border-color:var(--tan-500)}.cform .btn{margin-top:4px;justify-self:start;cursor:pointer}.fstat{font-weight:600;min-height:24px;color:#fff}@media(max-width:860px){.cform .frow{grid-template-columns:1fr}}
 footer{padding:40px 0;color:var(--muted);font-size:14px}footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}footer img{height:28px}
 @media(max-width:860px){.hero .wrap,.split,.two,.cta{grid-template-columns:1fr}.grid3{grid-template-columns:1fr}.display{font-size:40px;line-height:44px}header nav a.l{display:none}.hero{padding:40px 0}.cta{padding:32px}.cta img{display:none}}
 </style></head><body>
@@ -128,11 +129,28 @@ footer{padding:40px 0;color:var(--muted);font-size:14px}footer .wrap{display:fle
 </div></section>
 
 <section class="s" id="start"><div class="wrap"><div class="cta"><div>
-<h2>The calmest voice in your busiest hour.</h2><p class="lead" style="color:var(--bamboo-100);margin-top:8px">Book a quick setup call. We'll design your receptionist together and have it answering in days.</p>
-<a class="btn" href="mailto:hello@ringpanda.ai?subject=Ring%20Panda%20setup%20call">Book a setup call</a></div>
+<h2>The calmest voice in your busiest hour.</h2><p class="lead" style="color:var(--bamboo-100);margin-top:8px">Leave your info and we’ll set up a quick call. We'll design your receptionist together and have it answering in days.</p>
+<form id="setup-form" class="cform" novalidate>
+<div class="frow"><label>Your name<input name="name" required autocomplete="name"></label><label>Business<input name="business" autocomplete="organization"></label></div>
+<div class="frow"><label>Phone<input name="phone" type="tel" autocomplete="tel"></label><label>Email<input name="email" type="email" autocomplete="email"></label></div>
+<label>Best time to call<input name="best_time" placeholder="Weekday mornings"></label>
+<label>Anything we should know? <span style="opacity:.7">(optional)</span><textarea name="note" rows="3"></textarea></label>
+<input name="website" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
+<button class="btn" type="submit">Book a setup call</button>
+<p id="form-status" role="status" class="fstat"></p>
+</form></div>
 <img src="/assets/img/panda-waving.svg" alt="The Ring Panda panda waving"></div></div></section>
 
 <footer><div class="wrap"><img src="/assets/img/lockup-horizontal.svg" alt="Ring Panda"><span>© 2026 Ring Panda, a Kastle Capital LLC company.</span></div></footer>
+<script>
+(function(){const ENDPOINT="https://formsubmit.co/ajax/chris.kasteler@gmail.com";const f=document.getElementById("setup-form"),st=document.getElementById("form-status");
+f.addEventListener("submit",async e=>{e.preventDefault();const d=Object.fromEntries(new FormData(f).entries());
+if(!d.name.trim()){st.textContent="Add your name so we know who to call.";return}
+if(!d.phone.trim()&&!d.email.trim()){st.textContent="Add a phone number or email so we can reach you.";return}
+d.page=location.href;const b=f.querySelector("button");b.disabled=true;st.textContent="Sending...";
+try{const r=await fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({Name:d.name,Business:d.business,Phone:d.phone,Email:d.email,"Best time to call":d.best_time,Note:d.note,Page:d.page,_subject:"Ring Panda setup call request: "+(d.business||d.name),_template:"table",_honey:d.website,_replyto:d.email||undefined})});if(!r.ok)throw new Error(r.status);
+f.reset();st.textContent="Thanks! We'll reach out soon to set up your call."}catch(err){st.textContent="That didn't go through. Please try again in a moment."}finally{b.disabled=false}});})();
+</script>
 <script type="module">
 const KEY="84126ba0-5d8c-4fc2-9208-c086b3469ae4";
 let vapi=null,active=null;
