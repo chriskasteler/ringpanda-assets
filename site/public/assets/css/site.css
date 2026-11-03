@@ -92,3 +92,5 @@ body.has-sticky{padding-bottom:76px}
 .gate{padding:24px}.gate .acts .btn{flex:1}
 }
 .short{display:none}@media(max-width:860px){.short{display:inline}}
+
+.promo{margin:20px 0 4px;background:#FDE8D2;border:2px solid var(--tan-500);border-radius:var(--r-md,12px);padding:14px 16px;display:flex;flex-direction:column;gap:2px}.promo strong{font:700 18px/24px Outfit;color:var(--ink)}.promo span{font-size:15px;line-height:22px;color:var(--ink)}.price s{color:var(--muted)}
