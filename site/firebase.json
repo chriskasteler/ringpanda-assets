@@ -1,1 +1,1 @@
-{"hosting":{"public":"public","ignore":["firebase.json","**/.*"]}}
+{"hosting":{"public":"public","ignore":["firebase.json","**/.*"],"headers":[{"source":"**/*.html","headers":[{"key":"Cache-Control","value":"no-cache"}]},{"source":"/","headers":[{"key":"Cache-Control","value":"no-cache"}]}]}}
