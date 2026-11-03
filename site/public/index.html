@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ring Panda | Never miss another call</title>
+<meta name="description" content="Ring Panda answers your business phone, takes the message, books the job and texts you the details. Done for you, set up in days.">
+<link rel="icon" href="/assets/img/favicon.svg" type="image/svg+xml">
+<meta property="og:title" content="Ring Panda | Never miss another call"><meta property="og:description" content="The friendly AI receptionist that answers every call for your business.">
+<style>
+@font-face{font-family:Outfit;font-weight:600;src:url(/assets/fonts/outfit-latin-600-normal.woff2) format("woff2");font-display:swap}
+@font-face{font-family:Outfit;font-weight:700;src:url(/assets/fonts/outfit-latin-700-normal.woff2) format("woff2");font-display:swap}
+@font-face{font-family:Outfit;font-weight:800;src:url(/assets/fonts/outfit-latin-800-normal.woff2) format("woff2");font-display:swap}
+@font-face{font-family:Figtree;font-weight:400;src:url(/assets/fonts/figtree-latin-400-normal.woff2) format("woff2");font-display:swap}
+@font-face{font-family:Figtree;font-weight:600;src:url(/assets/fonts/figtree-latin-600-normal.woff2) format("woff2");font-display:swap}
+@font-face{font-family:Figtree;font-weight:700;src:url(/assets/fonts/figtree-latin-700-normal.woff2) format("woff2");font-display:swap}
+:root{--bamboo-700:#1E5B43;--bamboo-600:#267352;--bamboo-100:#E3F0E8;--tan-500:#F28C28;--tan-600:#E07A16;--ink:#1B1A17;--muted:#5C574E;--line:#E4DCCD;--surface:#FBF7F0;--raised:#FFFFFF;--sunken:#F3ECE0;--success:#2A7035;--r-md:12px;--r-lg:20px;--r-pill:999px;--shadow:0 1px 2px rgba(27,26,23,.06),0 4px 12px rgba(27,26,23,.06);--lift:0 2px 4px rgba(27,26,23,.06),0 12px 32px rgba(27,26,23,.12)}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth}
+body{font-family:Figtree,system-ui,sans-serif;font-size:16px;line-height:24px;color:var(--ink);background:var(--surface);-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.display{font-family:Outfit,system-ui,sans-serif}
+.display{font-size:56px;line-height:60px;font-weight:800;letter-spacing:-.02em}
+h2{font-size:32px;line-height:38px;font-weight:700;letter-spacing:-.015em}h3{font-size:24px;line-height:30px;font-weight:700}h4{font-size:20px;line-height:26px;font-weight:600}
+.lead{font-size:18px;line-height:28px;color:var(--muted)}.small{font-size:14px;line-height:20px;color:var(--muted)}
+.eyebrow{font-size:12px;line-height:16px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--bamboo-700);margin-bottom:8px}
+.wrap{max-width:1120px;margin:0 auto;padding:0 24px}
+a{color:inherit}.ic{width:24px;height:24px;flex:none}
+.btn{display:inline-flex;align-items:center;gap:10px;font:600 16px/24px Figtree,sans-serif;padding:12px 22px;border-radius:var(--r-pill);text-decoration:none;border:2px solid transparent;transition:background .15s}
+.btn-primary{background:var(--bamboo-700);color:#fff}.btn-primary:hover{background:var(--bamboo-600)}
+.call{display:inline-flex;align-items:center;gap:14px;background:var(--tan-500);color:var(--ink);border-radius:var(--r-pill);padding:12px 26px 12px 18px;text-decoration:none;box-shadow:var(--shadow)}
+.call:hover{background:var(--tan-600)}.call .ic{width:28px;height:28px}
+.call small{display:block;font:700 12px/16px Figtree;letter-spacing:.08em;text-transform:uppercase}.call b{font:700 24px/30px Outfit;font-variant-numeric:tabular-nums}
+header{position:sticky;top:0;background:rgba(251,247,240,.94);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:9}
+header .wrap{display:flex;align-items:center;justify-content:space-between;height:72px}header img{height:40px}
+header nav{display:flex;gap:24px;align-items:center}header nav a.l{text-decoration:none;font-weight:600;color:var(--muted)}
+.hero{padding:72px 0 64px}.hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:48px;align-items:center}
+.hero .lead{margin:20px 0 32px;max-width:520px}.calls{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.hero img{width:100%;max-width:440px;justify-self:center}
+section.s{padding:72px 0;border-top:1px solid var(--line)}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:40px}
+.card{background:var(--raised);border:1px solid var(--line);border-radius:var(--r-lg);padding:28px;box-shadow:var(--shadow)}
+.badge{width:48px;height:48px;border-radius:var(--r-md);background:var(--bamboo-100);color:var(--bamboo-700);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.card p{color:var(--muted);margin-top:8px}
+.split{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px;align-items:center}.split img{width:100%;max-width:380px}
+.chips{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}.chip{background:var(--sunken);border:1px solid var(--line);border-radius:var(--r-pill);padding:6px 14px;font-weight:600;font-size:14px}
+.qa{background:var(--raised);border:1px solid var(--line);border-radius:var(--r-md);padding:16px 18px;margin-top:12px}.qa b{display:block}.qa span{color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:40px}
+ul.chk{list-style:none;margin-top:16px}ul.chk li{display:flex;gap:10px;margin:10px 0}ul.chk .ic{color:var(--success);width:22px;height:22px;margin-top:1px}
+.price{max-width:460px;margin:40px auto 0;background:var(--raised);border:2px solid var(--bamboo-700);border-radius:var(--r-lg);padding:32px;box-shadow:var(--lift);position:relative;text-align:left}
+.ribbon{position:absolute;top:-14px;left:32px;background:var(--tan-500);color:var(--ink);font:700 12px/16px Figtree;letter-spacing:.08em;text-transform:uppercase;padding:6px 12px;border-radius:var(--r-pill)}
+.amt{font:800 44px/48px Outfit;letter-spacing:-.02em;margin:16px 0 4px}.amt span{font:400 18px Figtree;color:var(--muted)}
+.price .btn{width:100%;justify-content:center;margin-top:20px}
+details{background:var(--raised);border:1px solid var(--line);border-radius:var(--r-md);padding:18px 22px;margin-top:12px}summary{font:600 20px/26px Outfit;cursor:pointer}details p{margin-top:10px;color:var(--muted)}
+.cta{background:var(--bamboo-700);color:#fff;border-radius:var(--r-lg);padding:48px;display:grid;grid-template-columns:1fr auto;gap:32px;align-items:center}
+.cta img{width:180px;background:var(--surface);border-radius:var(--r-lg);padding:12px}
+.cta .btn{background:var(--tan-500);color:var(--ink);margin-top:24px}.cta .btn:hover{background:var(--tan-600)}
+footer{padding:40px 0;color:var(--muted);font-size:14px}footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}footer img{height:28px}
+@media(max-width:860px){.hero .wrap,.split,.two,.cta{grid-template-columns:1fr}.grid3{grid-template-columns:1fr}.display{font-size:40px;line-height:44px}header nav a.l{display:none}.hero{padding:40px 0}.cta{padding:32px}.cta img{display:none}}
+</style></head><body>
+<header><div class="wrap"><a href="/"><img src="/assets/img/lockup-horizontal.svg" alt="Ring Panda"></a>
+<nav><a class="l" href="#how">How it works</a><a class="l" href="#pricing">Pricing</a><a class="btn btn-primary" href="#start">Get my panda</a></nav></div></header>
+
+<section class="hero"><div class="wrap"><div>
+<h1 class="display">Never miss another call.</h1>
+<p class="lead">Ring Panda is the friendly AI receptionist that answers every call, takes messages and books jobs, then checks your POS and dispatch so it can answer "where's my pizza?"</p>
+<div class="calls">
+<a class="call" href="tel:+18185550142"><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4.2a4.5 4.5 0 0 0 5.3 5.3l-9.3 9.3a2.4 2.4 0 0 1-3.4-3.4l9.3-9.3a4.5 4.5 0 0 0-1.9-1.9z"/></svg><span><small>Call the demo plumber</small><b>(818) 555-0142</b></span></a>
+<a class="call" href="tel:+18185550143"><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7c5-3 11-3 16 0L12 21z"/><path d="M5.5 9.5c4-2 9-2 13 0"/><circle cx="10.5" cy="12.5" r="1"/><circle cx="13.5" cy="15.5" r="1"/></svg><span><small>Call the demo pizza shop</small><b>(818) 555-0143</b></span></a>
+<span class="small">Call either one right now and hear it answer like it's your shop.</span></div></div>
+<img src="/assets/img/panda-answering-phone.svg" alt="The Ring Panda panda answering a phone"></div></section>
+
+<section class="s" id="how"><div class="wrap">
+<div class="eyebrow">How it works</div><h2>We set it up. Your panda answers.</h2>
+<div class="grid3">
+<div class="card"><div class="badge"><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="5" width="14" height="16" rx="2.5"/><rect x="9" y="3" width="6" height="4" rx="1.5"/><path d="M8.5 12l2 2 4-4M8.5 17h7"/></svg></div><h4>Tell us about your shop</h4><p>A five-minute form: your hours, prices, service area, and what your panda can and can't say.</p></div>
+<div class="card"><div class="badge"><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h3.2l1.6 4-2 1.3a11 11 0 0 0 5 5l1.3-2 4 1.6V17a2 2 0 0 1-2 2A15 15 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></div><h4>Forward your missed calls</h4><p>Keep your number. When you can't pick up, the call rolls to your panda. Day, night and weekends.</p></div>
+<div class="card"><div class="badge"><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-7l-4.5 4v-4H6a2 2 0 0 1-2-2z"/><path d="M8 9h8M8 12h5"/></svg></div><h4>Get the details by text</h4><p>Every message, booking and urgent call lands on your phone, written up and ready to act on.</p></div>
+</div></div></section>
+
+<section class="s"><div class="wrap split">
+<img src="/assets/img/panda-holding-clipboard.svg" alt="The Ring Panda panda holding a clipboard">
+<div><div class="eyebrow">Your systems</div><h2>Your panda knows what your systems know.</h2>
+<p class="lead" style="margin-top:16px">Most answering services can only take a message. We connect your panda to the tools you already run, so callers get real answers, not "someone will call you back."</p>
+<div class="chips"><span class="chip">POS and online ordering</span><span class="chip">Order tracking</span><span class="chip">Scheduling and dispatch</span><span class="chip">Your CRM</span></div>
+<div class="qa"><b>"Where's my pizza?"</b><span>"It just came out of the oven. It'll be ready for pickup in about five minutes."</span></div>
+<div class="qa"><b>"When's my plumber coming?"</b><span>"Tom is on the schedule for 2 to 4 this afternoon."</span></div>
+<p class="small" style="margin-top:16px">We build each connection for your setup during onboarding.</p></div></div></section>
+
+<section class="s"><div class="wrap">
+<div class="eyebrow">Built for busy shops</div><h2>Books the job while you're on the roof.</h2>
+<div class="two">
+<div class="card"><div class="badge"><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 4.2a4.5 4.5 0 0 0 5.3 5.3l-9.3 9.3a2.4 2.4 0 0 1-3.4-3.4l9.3-9.3a4.5 4.5 0 0 0-1.9-1.9z"/></svg></div><h3>Trades</h3><p>Plumbers, electricians, HVAC, roofers and handymen.</p>
+<ul class="chk"><li><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.2 12.2l2.6 2.6 5-5.2"/></svg>Spots emergencies and texts you right away</li><li><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.2 12.2l2.6 2.6 5-5.2"/></svg>Books jobs into your open slots</li><li><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.2 12.2l2.6 2.6 5-5.2"/></svg>Answers "how much is a service call?"</li><li><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.2 12.2l2.6 2.6 5-5.2"/></svg>Tells callers when the tech is on the way</li></ul></div>
+<div class="card"><div class="badge"><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7c5-3 11-3 16 0L12 21z"/><path d="M5.5 9.5c4-2 9-2 13 0"/><circle cx="10.5" cy="12.5" r="1"/><circle cx="13.5" cy="15.5" r="1"/></svg></div><h3>Restaurants and cafés</h3><p>Pizza shops, takeout spots and cafés.</p>
+<ul class="chk"><li><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.2 12.2l2.6 2.6 5-5.2"/></svg>Answers the phone through the lunch rush</li><li><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.2 12.2l2.6 2.6 5-5.2"/></svg>Takes pickup orders the way you want them</li><li><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.2 12.2l2.6 2.6 5-5.2"/></svg>Gives hours, menu and prices</li><li><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.2 12.2l2.6 2.6 5-5.2"/></svg>Answers "where's my order?"</li></ul></div>
+</div></div></section>
+
+<section class="s" id="pricing"><div class="wrap" style="text-align:center">
+<div class="eyebrow">Pricing</div><h2>One simple plan. Done for you.</h2>
+<div class="price"><span class="ribbon">Most popular</span>
+<h3>Ring Panda</h3><p class="small">For one-truck shops and neighborhood restaurants.</p>
+<div class="amt">$149<span> a month</span></div><p class="small">$500 one-time setup. Cancel anytime.</p>
+<ul class="chk"><li><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.2 12.2l2.6 2.6 5-5.2"/></svg>About 300 minutes of calls a month</li><li><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.2 12.2l2.6 2.6 5-5.2"/></svg>We write and tune your panda's script</li><li><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.2 12.2l2.6 2.6 5-5.2"/></svg>A text for every message and booking</li><li><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.2 12.2l2.6 2.6 5-5.2"/></svg>Connected to your systems</li><li><svg class="ic" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"  fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="8.5"/><path d="M8.2 12.2l2.6 2.6 5-5.2"/></svg>A monthly report of every call it handled</li></ul>
+<a class="btn btn-primary" href="#start">Get my panda</a></div></div></section>
+
+<section class="s"><div class="wrap" style="max-width:820px">
+<div class="eyebrow">Questions</div><h2>Good questions, plain answers.</h2>
+<details><summary>Do I have to change my phone number?</summary><p>No. You keep your number and forward the calls you can't get to. Your panda picks up from there.</p></details>
+<details><summary>Will callers know it's not a person?</summary><p>It sounds natural and friendly, and it always says it's an assistant if someone asks. Most callers just want a fast answer, and they get one.</p></details>
+<details><summary>What if it's a real emergency?</summary><p>You choose what counts as urgent. Your panda gives callers the right safety steps and texts you right away.</p></details>
+<details><summary>Can it quote prices or take orders?</summary><p>Only if you want it to. You set exactly what it can and can't do, and we test it with practice calls before it goes live.</p></details>
+<details><summary>How long does setup take?</summary><p>Usually a few days. You fill out one form, we build and test your panda, then you turn on call forwarding.</p></details>
+<details><summary>What if I go over my minutes?</summary><p>We let you know before it happens and keep answering your calls. Extra minutes are billed at a simple per-minute rate.</p></details>
+</div></section>
+
+<section class="s" id="start"><div class="wrap"><div class="cta"><div>
+<h2>The calmest voice in your busiest hour.</h2><p class="lead" style="color:var(--bamboo-100);margin-top:8px">Book a quick setup call. We'll show you your panda and have it answering in days.</p>
+<a class="btn" href="mailto:hello@ringpanda.ai?subject=Ring%20Panda%20setup%20call">Book a setup call</a></div>
+<img src="/assets/img/panda-waving.svg" alt="The Ring Panda panda waving"></div></div></section>
+
+<footer><div class="wrap"><img src="/assets/img/lockup-horizontal.svg" alt="Ring Panda"><span>© 2026 Ring Panda, a Kastle Capital LLC company.</span></div></footer>
+</body></html>
