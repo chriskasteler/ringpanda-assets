@@ -118,7 +118,7 @@
 <h2>The calmest voice in your busiest hour.</h2><p class="lead" style="color:var(--bamboo-100);margin-top:8px">Leave your info and we'll set up a quick call. We'll design your receptionist together and have it answering in days.</p>
 <form id="setup-form" class="cform" novalidate>
 <div class="frow"><label>Your name<input name="name" required autocomplete="name"></label><label>Business<input name="business" required autocomplete="organization"></label></div>
-<div class="frow"><label>Phone<input name="phone" type="tel" required autocomplete="tel"></label><label><span>Email <span class="opt">(optional)</span></span><input name="email" type="email" autocomplete="email"></label></div>
+<div class="frow"><label>Phone<input name="phone" type="tel" required autocomplete="tel"></label><label>Email<input name="email" type="email" required autocomplete="email"></label></div>
 <label><span>Anything we should know? <span class="opt">(optional)</span></span><textarea name="note" rows="3"></textarea></label>
 <input name="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
 <button class="btn" type="submit">Book a setup call</button>
@@ -143,7 +143,9 @@
 <div class="sticky-cta" id="sticky-cta"><a class="btn btn-primary" href="#start">Book a setup call</a></div>
 
 <script>
-window.RP_FORM_ENDPOINT="https://formsubmit.co/ajax/chris.kasteler@gmail.com";
+window.RP_FORM_ENDPOINT="https://docs.google.com/forms/d/e/1FAIpQLSfuKAQH8c1H9PWobA3A0MMNJYjVgEK773zyPv2WErWfR-58VQ/formResponse";
+window.RP_FIELDS={Source:"entry.1349318783",Name:"entry.1653082746",Business:"entry.1208461523",Phone:"entry.1371140710",Email:"entry.280359388",Note:"entry.2001813216",Agent:"entry.1351686833",Page:"entry.948098935"};
+window.rpSend=function(data){const b=new URLSearchParams();for(const k in data){if(window.RP_FIELDS[k]&&data[k])b.append(window.RP_FIELDS[k],data[k])}return fetch(window.RP_FORM_ENDPOINT,{method:"POST",mode:"no-cors",body:b})};
 window.rpTrack=function(name,params){try{if(typeof gtag==="function")gtag("event",name,params||{})}catch(e){}};
 if("scrollRestoration" in history)history.scrollRestoration="manual";
 window.addEventListener("load",()=>{const nav=performance.getEntriesByType&&performance.getEntriesByType("navigation")[0];const reload=nav&&nav.type==="reload";if(!location.hash||reload){if(location.hash)history.replaceState(null,"",location.pathname+location.search);window.scrollTo({top:0,behavior:"instant"})}});
@@ -153,9 +155,9 @@ const name=(d.name||"").trim(),biz=(d.business||"").trim(),phone=(d.phone||"").t
 if(!name){st.textContent="Add your name so we know who to call.";f.name.focus();return}
 if(!biz){st.textContent="Add your business name.";f.business.focus();return}
 if(phone.replace(/\D/g,"").length<10){st.textContent="Add a phone number we can call you at.";f.phone.focus();return}
-if(email&&!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){st.textContent="That email doesn't look right. Fix it or leave it blank.";f.email.focus();return}
+if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)){st.textContent="Add an email we can reach you at.";f.email.focus();return}
 const b=f.querySelector("button[type=submit]");b.disabled=true;st.textContent="Sending...";
-try{const r=await fetch(ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({Name:name,Business:biz,Phone:phone,Email:email,Note:d.note,Page:location.href,_subject:"Ring Panda setup call request: "+(biz||name),_template:"table",_honey:d.website,_replyto:email||undefined})});if(!r.ok)throw new Error(r.status);
+try{if(d.website)throw new Error("bot");await window.rpSend({Source:"Setup form",Name:name,Business:biz,Phone:phone,Email:email,Note:d.note,Page:location.href});
 f.reset();st.textContent="Thanks! We'll call you within one business day.";window.rpTrack("generate_lead",{form:"setup_call"})}catch(err){st.textContent="That didn't go through. Please try again in a moment."}finally{b.disabled=false}});})();
 (function(){const bar=document.getElementById("sticky-cta"),start=document.getElementById("start"),hero=document.querySelector(".hero-cta");if(!bar||!start||!("IntersectionObserver" in window))return;
 const seen=new Map();const io=new IntersectionObserver(es=>{es.forEach(en=>seen.set(en.target,en.isIntersecting));bar.classList.toggle("off",[...seen.values()].some(Boolean))},{threshold:0.05});
@@ -209,7 +211,7 @@ gf.addEventListener("submit",e=>{e.preventDefault();
   const b=pending;
   if(!honey){
     try{localStorage.setItem("rp_lead",JSON.stringify({email,phone,ts:new Date().toISOString()}))}catch(err){}
-    fetch(window.RP_FORM_ENDPOINT,{method:"POST",headers:{"Content-Type":"application/json","Accept":"application/json"},body:JSON.stringify({Email:email,Phone:phone,Source:"Demo email gate",Agent:b?b.dataset.name:"",Page:location.href,_subject:"Ring Panda demo lead: "+email,_template:"table",_honey:honey,_replyto:email})}).catch(err=>console.error(err));
+    (honey?Promise.resolve():window.rpSend({Source:"Demo email gate",Email:email,Phone:phone,Agent:b?b.dataset.name:"",Page:location.href})).catch(err=>console.error(err));
     window.rpTrack("generate_lead",{form:"demo_gate"});
     if(guide)guide.hidden=false;
   }
